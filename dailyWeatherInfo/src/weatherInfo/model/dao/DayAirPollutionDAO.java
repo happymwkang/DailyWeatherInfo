@@ -19,7 +19,7 @@ public class DayAirPollutionDAO {
 			
 			for (int j = 0; j < dayairpollution.size(); j++) {
 				DayAirPollutionDTO dailypollution = dayairpollution.get(j);
-				pstmt = con.prepareStatement("insert into air_pollution values(?, ?, ?, ?, ?, ?, ?, ?)");
+				pstmt = con.prepareStatement("insert into dayairpollution values(?, ?, ?, ?, ?, ?, ?, ?)");
 				pstmt.setString(1, dailypollution.getMsrdt_de());
 				pstmt.setString(2, dailypollution.getMsrste_nm());
 				pstmt.setDouble(3, dailypollution.getNo2());

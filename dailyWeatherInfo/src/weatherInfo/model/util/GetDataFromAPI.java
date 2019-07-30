@@ -5,6 +5,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
@@ -13,14 +17,15 @@ import weatherInfo.model.dao.DayAirPollutionDAO;
 
 public class GetDataFromAPI {
 
-	public static  JSON getData(String url) {
+	public static  JSON getData(String dateConfig) {
 		BufferedReader br = null;
 		String result = "";
 		JSONObject obj = null;
 		JSONObject obj2 = null;
 		JSONArray data = null;
+		String url = null;
 		try {
-//			url = "http://openAPI.seoul.go.kr:8088/797a42666568617038304266515253/json/DailyAverageAirQuality/1/30/20190625";
+			url = "http://openAPI.seoul.go.kr:8088/797a42666568617038304266515253/json/DailyAverageAirQuality/1/999/"+dateConfig;
 			URL urlstr = new URL(url);
 			HttpURLConnection urlconnection = (HttpURLConnection) urlstr.openConnection();
 			urlconnection.setRequestMethod("GET");
@@ -61,10 +66,34 @@ public class GetDataFromAPI {
 		}
 		return obj;
 	}
-public static void main(String[] args) throws SQLException {
-	boolean result = DayAirPollutionDAO.addDayAirPollution(JSONPaser.jasonParse(null));
 	
-	System.out.println(JSONPaser.jasonParse(null));
+	public static String urlConfig(int i) {
+		
+	SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+	Date date = null;
+	try {
+		date = format.parse("20190101");
+	} catch (ParseException e) {
+		e.printStackTrace();
+	}
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.add(Calendar.DATE, i);		//날짜 더하기
+//            cal.add(Calendar.MONTH, 1);		//월 더하기
+
+//            String varDate = new SimpleDateFormat("yyyyMMdd").format(date);
+//	System.out.println("날짜 확인"+format.format(cal.getTime()));
+	return format.format(cal.getTime());
+	}
+
+
+	
+public static void main(String[] args) throws SQLException, ParseException {
+//	boolean result = DayAirPollutionDAO.addDayAirPollution(JSONPaser.jasonParse(null));
+	
+//	System.out.println(JSONPaser.jasonParse(null));
+	System.out.println(urlConfig(50));
+	
 	
 }
 
