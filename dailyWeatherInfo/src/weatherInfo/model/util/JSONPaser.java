@@ -12,9 +12,10 @@ public class JSONPaser {
 	public static ArrayList<DayAirPollutionDTO> jasonParse(JSON json) {
 		
 		
-		String url = "http://openAPI.seoul.go.kr:8088/797a42666568617038304266515253/json/DailyAverageAirQuality/1/30/";
-		JSONObject obj = JSONObject.fromObject(GetDataFromAPI.getData(url +"20190625"));
+//		String url = "http://openAPI.seoul.go.kr:8088/797a42666568617038304266515253/json/DailyAverageAirQuality/1/30/";
+//		JSONObject obj = JSONObject.fromObject(GetDataFromAPI.getData(url +"20190625"));
 		ArrayList<DayAirPollutionDTO> dayairpollution = new ArrayList<DayAirPollutionDTO>();
+		JSONObject obj = JSONObject.fromObject(json);
 		JSONObject obj2 = (JSONObject) obj.get("DailyAverageAirQuality");
 		JSONArray data = (JSONArray) obj2.get("row");
 		for (int i =0 ; i < data.size() ; i++) {

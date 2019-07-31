@@ -17,7 +17,7 @@ import weatherInfo.model.dao.DayAirPollutionDAO;
 
 public class GetDataFromAPI {
 
-	public static  JSON getData(String dateConfig) {
+	public static JSON getData(String dateConfig) {
 		BufferedReader br = null;
 		String result = "";
 		JSONObject obj = null;
@@ -72,7 +72,7 @@ public class GetDataFromAPI {
 	SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 	Date date = null;
 	try {
-		date = format.parse("20190101");
+		date = format.parse("20190501");
 	} catch (ParseException e) {
 		e.printStackTrace();
 	}
@@ -89,12 +89,11 @@ public class GetDataFromAPI {
 
 	
 public static void main(String[] args) throws SQLException, ParseException {
-//	boolean result = DayAirPollutionDAO.addDayAirPollution(JSONPaser.jasonParse(null));
-	
+	for (int i = 0 ; i < 90 ; i ++) {
+	 DayAirPollutionDAO.addDayAirPollution(JSONPaser.jasonParse(getData(urlConfig(i))));
+	}
 //	System.out.println(JSONPaser.jasonParse(null));
-	System.out.println(urlConfig(50));
-	
-	
+//	System.out.println(urlConfig(50));
 }
 
 }
