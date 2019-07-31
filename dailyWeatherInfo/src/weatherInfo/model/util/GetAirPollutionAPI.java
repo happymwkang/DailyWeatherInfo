@@ -13,7 +13,7 @@ import java.util.Date;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import weatherInfo.model.dao.DayAirPollutionDAO;
+import weatherInfo.model.dao.DayWeatherDAO;
 
 public class GetAirPollutionAPI {
 
@@ -72,7 +72,7 @@ public class GetAirPollutionAPI {
 	SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 	Date date = null;
 	try {
-		date = format.parse("20190501");
+		date = format.parse("20190628");
 	} catch (ParseException e) {
 		e.printStackTrace();
 	}
@@ -88,12 +88,17 @@ public class GetAirPollutionAPI {
 
 
 	
-public static void main(String[] args) throws SQLException, ParseException {
-	for (int i = 0 ; i < 90 ; i ++) {
-	 DayAirPollutionDAO.addDayAirPollution(JsonToAirPollution.jasonParse(getData(urlConfig(i))));
-	}
+public static void main(String[] args) throws Exception {
+//	for (int i = 0 ; i < 90 ; i ++) {
+//	 DayAirPollutionDAO.addDayAirPollution(JsonToAirPollution.jasonParse(getData(urlConfig(i))));
+//	}
 //	System.out.println(JSONPaser.jasonParse(null));
 //	System.out.println(urlConfig(50));
+	
+	for (int i = 0 ; i < 90 ; i ++) {
+		 DayWeatherDAO.addDayWeatherData(JsonToWeather.JSONToWeather(GetWeatherAPI.readUrl(urlConfig(i))));
+		}
+// System.out.println(GetWeatherAPI.readUrl(urlConfig(1)));	
 }
 
 }

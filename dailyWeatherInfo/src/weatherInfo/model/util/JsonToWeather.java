@@ -1,18 +1,20 @@
 package weatherInfo.model.util;
 
 import java.util.ArrayList;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
+
+import net.sf.json.JSON;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import weatherInfo.model.dto.DayWeatherDTO;
 
 public class JsonToWeather {
-	public static ArrayList<DayWeatherDTO> JSONToWeather() throws Exception {
-		JSONParser jsonparser = new JSONParser();
+	public static ArrayList<DayWeatherDTO> JSONToWeather(JSON json) throws Exception {
+//		JSONParser jsonparser = new JSONParser();
 		ArrayList<DayWeatherDTO> weatherColumns= new ArrayList<DayWeatherDTO>();
-		JSONObject jsonobject = (JSONObject) jsonparser.parse(GetWeatherAPI.readUrl(GetWeatherAPI.urlConfig(1)));
-		JSONObject json = (JSONObject) jsonobject.get("DailyWeatherStation");
-		JSONArray rowData = (JSONArray) json.get("row");
+//		JSONObject jsonobject = (JSONObject) jsonparser.parse(GetWeatherAPI.readUrl(GetWeatherAPI.urlConfig(1)));
+		JSONObject obj = JSONObject.fromObject(json);
+		JSONObject obj2 = (JSONObject) obj.get("DailyWeatherStation");
+		JSONArray rowData = (JSONArray) obj2.get("row");
 		JSONObject dataObj = null; 
 		
 		for (int i = 0; i < rowData.size(); i++) {
