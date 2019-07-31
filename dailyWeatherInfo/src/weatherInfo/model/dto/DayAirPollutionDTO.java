@@ -1,8 +1,12 @@
 package weatherInfo.model.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class DayAirPollutionDTO {
 	/*
 순번	출력명		출력설명
@@ -24,17 +28,6 @@ public class DayAirPollutionDTO {
 	private double pm10;
 	private double pm25;
 	
-	public DayAirPollutionDTO(String msrdt_de, String msrste_nm, double no2, double o3, double co, double so2, double pm10, double pm25) {
-		super();
-		this.msrdt_de = msrdt_de;
-		this.msrste_nm = msrste_nm;
-		this.no2 = no2;
-		this.o3 = o3;
-		this.co = co;
-		this.so2 = so2;
-		this.pm10 = pm10;
-		this.pm25 = pm25;
-	}
 	
 	@Override
 	public String toString() {

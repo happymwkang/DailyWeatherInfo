@@ -24,9 +24,9 @@
 		
 	3. 깃을 이용한 프로젝트 merge
 		
-	4. JAVA 서비스 로직 구상
+	4. DTO, DAO crud 구축
 
-	5. DTO, DAO 구축
+	5. JAVA 서비스 로직 구상
 
 	
 	

@@ -2,6 +2,7 @@ package weatherInfo.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -40,4 +41,65 @@ public class DayWeatherDAO {
 		}
 		return false;
 	}
+	
+	public static ArrayList<DayWeatherDTO> getAllDayWeather() throws SQLException{
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<DayWeatherDTO> allDay = null;
+		try{
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement("select * from dayWeatherInfo");
+			rset = pstmt.executeQuery();
+			
+			allDay = new ArrayList<DayWeatherDTO>();
+			while(rset.next()){
+				allDay.add(new DayWeatherDTO(rset.getString(1), rset.getString(2), rset.getDouble(3), rset.getDouble(4),
+						rset.getDouble(5), rset.getDouble(6), rset.getDouble(7), rset.getDouble(8), rset.getDouble(9),
+						rset.getDouble(10), rset.getDouble(11)));
+			}
+		}finally{
+			DBUtil.close(con, pstmt, rset);
+		}
+		return allDay;
+	}
+	
+	public static DayWeatherDTO getOneDayWeather(String date, String location) throws SQLException{
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		DayWeatherDTO oneDay = null;
+		try{
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement("select * from dayWeatherInfo where saws_obs_tm = ? and stn_nm = ?");
+			pstmt.setString(1, date);
+			pstmt.setString(2, location);
+			rset = pstmt.executeQuery();
+			
+			oneDay = new DayWeatherDTO();
+			if (rset.next()) {
+				oneDay = (new DayWeatherDTO(rset.getString(1), rset.getString(2), rset.getDouble(3), rset.getDouble(4),
+						rset.getDouble(5), rset.getDouble(6), rset.getDouble(7), rset.getDouble(8), rset.getDouble(9),
+						rset.getDouble(10), rset.getDouble(11)));
+			}
+		}finally{
+			DBUtil.close(con, pstmt, rset);
+		}
+		return oneDay;
+	}
+	
+	public static void main(String[] args) {
+
+		DayWeatherDTO one = null;
+		try {
+			one = getOneDayWeather("20190728", "º≠√ ");
+			
+				System.out.println(one);
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
