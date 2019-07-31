@@ -7,7 +7,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import weatherInfo.model.dto.DayAirPollutionDTO;
 
-public class JSONPaser {
+public class JsonToAirPollution {
 
 	public static ArrayList<DayAirPollutionDTO> jasonParse(JSON json) {
 		
@@ -47,4 +47,6 @@ public class JSONPaser {
 		}
 		return dayairpollution;
 	}
+	
+
 }

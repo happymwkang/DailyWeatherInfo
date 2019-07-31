@@ -15,7 +15,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import weatherInfo.model.dao.DayAirPollutionDAO;
 
-public class GetDataFromAPI {
+public class GetAirPollutionAPI {
 
 	public static JSON getData(String dateConfig) {
 		BufferedReader br = null;
@@ -90,7 +90,7 @@ public class GetDataFromAPI {
 	
 public static void main(String[] args) throws SQLException, ParseException {
 	for (int i = 0 ; i < 90 ; i ++) {
-	 DayAirPollutionDAO.addDayAirPollution(JSONPaser.jasonParse(getData(urlConfig(i))));
+	 DayAirPollutionDAO.addDayAirPollution(JsonToAirPollution.jasonParse(getData(urlConfig(i))));
 	}
 //	System.out.println(JSONPaser.jasonParse(null));
 //	System.out.println(urlConfig(50));
