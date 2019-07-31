@@ -1,8 +1,8 @@
 
 /*일일 대기오염정보 테이블*/
 CREATE TABLE dayairpollution(
-  MSRDT_DE Varchar2(10 ) NOT NULL,
-  MSRSTE_NM Varchar2(30 ) NOT NULL,
+  MSRDT_DE Varchar2(10) NOT NULL,
+  MSRSTE_NM Varchar2(30) NOT NULL,
   NO2 Number,
   O3 Number,
   CO Number,
@@ -14,7 +14,7 @@ CREATE TABLE dayairpollution(
   create table dayWeatherInfo
     (
     saws_obs_tm varchar2(10),
-    stn_nm varchar2(10),
+    stn_nm varchar2(30),
     saws_ta_avg number,
     saws_ta_min number,
     saws_ta_max number,
@@ -24,3 +24,38 @@ CREATE TABLE dayairpollution(
    saws_ws_avg number,
    saws_ws_max number,
    saws_rn_sum number);
+
+
+create table finedust_grade
+( grade varchar2(20),
+  PM10_low number,
+  PM10_high number,
+  PM25_low number,
+  PM25_high number);
+  
+  insert into finedust_grade values('좋음', 0, 30, 0, 15);
+  
+  insert into finedust_grade values('보통', 31, 50, 16, 25);
+  
+  insert into finedust_grade values('나쁨', 51, 100, 26, 50);
+  
+  insert into finedust_grade values('매우나쁨', 101, 1000, 51, 1000);
+  
+  create table discomfort_grade
+  ( grade varchar2(20),
+	low number,
+	high number);
+	
+  insert into discomfort_grade values('매우높음', 80, 100);
+  
+  insert into discomfort_grade values('높음', 75, 79);
+  
+  insert into discomfort_grade values('보통', 68, 74);
+  
+  insert into discomfort_grade values('낮음', 0, 67);
+  
+  create table Location
+  ( loc varchar2(30),
+    MSRSTE_NM Varchar2(30),
+    stn_nm varchar2(30) );
+    
