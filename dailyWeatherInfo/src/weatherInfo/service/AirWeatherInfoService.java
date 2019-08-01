@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import weatherInfo.exception.NotExistException;
 import weatherInfo.model.dao.DayAirPollutionDAO;
 import weatherInfo.model.dao.DayWeatherDAO;
+import weatherInfo.model.dao.FineDustGradeDAO;
 import weatherInfo.model.dao.ThiGradeDAO;
 import weatherInfo.model.dto.DayAirPollutionDTO;
 import weatherInfo.model.dto.DayWeatherDTO;
+import weatherInfo.model.dto.FineDustGradeDTO;
 import weatherInfo.model.dto.ThiGradeDTO;
 
 public class AirWeatherInfoService {
@@ -62,16 +64,23 @@ public class AirWeatherInfoService {
 		return aDayAirPollution;
 	}
 	
-	// --------------------- Weather & AirPollution Mixed SERVICE ---------------------
+	// --------------------- Weather & AirPollution Mixed getGRADE SERVICE ---------------------
 	
 	public static ThiGradeDTO getOneDayThiGrade(String date, String stationName) throws SQLException, NotExistException{
 		ThiGradeDTO aDayThiGrade = ThiGradeDAO.getThiGrade(date, stationName);
 		if(aDayThiGrade == null){
-			throw new NotExistException("검색하신 정보가 없습니다.");
+			throw new NotExistException("검색하신 불쾌지수 등급 정보가 없습니다.");
 		}
 		return aDayThiGrade;
 	}
 	
+	public static FineDustGradeDTO getOneDayFineDustGrade(String date, String location) throws SQLException, NotExistException{
+		FineDustGradeDTO aDayFineDustGrade = FineDustGradeDAO.getFineDustGrade(date, location);
+		if(aDayFineDustGrade == null){
+			throw new NotExistException("검색하신 미세먼지 등급 정보가 없습니다.");
+		}
+		return aDayFineDustGrade;
+	}
 	
 	
 }

@@ -38,6 +38,16 @@
 	
 	3. service(시찬)와 컨트롤러(민웅) 만들기
 	
+	4. View 틀 갖추기
+	
+	- start
+	- end
+	- fail
+	- success
+	
+	
+	
+	
 	
 	해야할 서비스 메소드
 	
