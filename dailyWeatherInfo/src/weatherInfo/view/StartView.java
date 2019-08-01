@@ -1,6 +1,5 @@
 package weatherInfo.view;
 
-import weatherInfo.exception.NotExistException;
 import weatherInfo.service.AirWeatherInfoController;
 
 public class StartView {

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ThiGradeDTO {
-	private String thiGrade; //불쾌지수 등급
 	private String date; //SAWS_OBS_TM 관측일자
 	private String stationName; //STN_NM 지점명
+	private String thiGrade; //불쾌지수 등급
 }
