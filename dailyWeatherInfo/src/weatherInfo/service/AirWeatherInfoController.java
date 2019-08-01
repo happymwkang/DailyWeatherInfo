@@ -3,88 +3,107 @@ package weatherInfo.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import weatherInfo.exception.NotExistException;
 import weatherInfo.model.dto.DayAirPollutionDTO;
-import weatherInfo.service.AirWeatherInfoService;
+import weatherInfo.model.dto.DayWeatherDTO;
+import weatherInfo.model.dto.FineDustGradeDTO;
+import weatherInfo.model.dto.ThiGradeDTO;
 import weatherInfo.view.EndView;
+import weatherInfo.view.SuccessView;
 
 public class AirWeatherInfoController {
-	private static AirWeatherInfoService service = AirWeatherInfoService.getInstance();
-
+	private static AirWeatherInfoController instance = new AirWeatherInfoController();
+	private AirWeatherInfoService service = AirWeatherInfoService.getInstance();
+	
+	// ---------------------- DayAirPollution CONTROLLER Section ----------------------
+	
+	public static AirWeatherInfoController getInstance() {
+		return instance;
+	}
+	
+	private AirWeatherInfoController() {};
+	
 	// 모든 대기오염 물질 정보 출력
-	public static ArrayList<DayAirPollutionDTO> getAllDayAirPollution(){
-			ArrayList<DayAirPollutionDTO> allDayAirPollution = null;
-			try{
-				allDayAirPollution = service.getAllDayAirPollutionData();		
-				RunningSuccessView.selectSuccess();
-			}catch(SQLException s){
-				s.printStackTrace();
-				EndView.showError("모든 대기오염정보 검색시 에러 발생");
-			}
-			return allDayAirPollution;
+	public ArrayList<DayAirPollutionDTO> getAllDayAirPollution() {
+		ArrayList<DayAirPollutionDTO> allDayAirPollution = null;
+		try {
+			allDayAirPollution = service.getAllDayAirPollutionData();
+			SuccessView.selectSuccess("모든 대기오염물질 정보 출력");
+		} catch (SQLException s) {
+			s.printStackTrace();
+			EndView.showError("모든 대기오염정보 검색시 에러 발생");
 		}
+		return allDayAirPollution;
+	}
 
 	// 특정 날짜, 지역 대기오염 정보 출력
-	public static DayAirPollutionDTO getDayAirPollution(String date, String location) {
+	public DayAirPollutionDTO getDayAirPollution(String date, String location) throws NotExistException {
 		DayAirPollutionDTO dayAirPollution = null;
 		try {
 			dayAirPollution = service.getOneDayAirPollutionData(date, location);
-			RunningSuccessView.selectSuccess();
+			SuccessView.selectSuccess("날짜인 "+ date + "과 " + location + "지역의 대기오염물질정보");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			EndView.showError("대기오염정보를 해당 일, 지역으로 해당 대기오염정보 검색시 오류 ");
 		}
 		return dayAirPollution;
 	}
-
-	// 새로운 프로젝트 저장 로직
-	public static boolean addProbonoProject(ProbonoProjectDTO probonoProject) {
-		boolean result = false;
+	
+	// --------------------- DayWeather CONTROLLER Section ------------------------
+	
+	public ArrayList<DayWeatherDTO> getAllDayWeatherInfo() {
+		ArrayList<DayWeatherDTO> allDayWeatherInfo = null;
 		try {
-			result = ProbonoProjectDAO.addProbonoProject(probonoProject);
-			RunningSuccessView.insertSuccess();
+			allDayWeatherInfo = service.getAllDayWeatherData();
+			SuccessView.selectSuccess("모든 기상정보 출력");
 		} catch (SQLException s) {
 			s.printStackTrace();
-			RunningEndView.showError("모든 프로젝트 저장시 에러 발생");
+			EndView.showError("모든 날씨정보 검색시 에러 발생");
 		}
-		return result;
+		return allDayWeatherInfo;
 	}
 
-	// 모든 프로젝트 검색 로직
-	public static ArrayList<ActivistDTO> getAllActivists() {
-		ArrayList<ActivistDTO> allProject = null;
+	public DayAirPollutionDTO getDayWeatherInfo(String date, String location) throws NotExistException {
+		DayAirPollutionDTO dayWeatherInfo = null;
 		try {
-			allProject = ActivistDAO.getAllActivists();
-			RunningSuccessView.selectSuccess();
-		} catch (SQLException s) {
-			s.printStackTrace();
-			RunningEndView.showError("모든 재능 기부자 검색시 에러 발생");
-		}
-		return allProject;
-	}
-
-	// 프로보노 아이디로 프로보노 목적 수정
-	public static boolean updateProbono(String probonoId, String probonoPurpose) {
-		boolean result = false;
-		try {
-			result = ProbonoService.updateProbono(probonoId, probonoPurpose);
-			RunningSuccessView.updateSuccess();
-		} catch (Exception s) {
-			s.printStackTrace();
-			RunningEndView.showError("프로보노 id로 프로보노 목적 변경 오류");
-		}
-		return result;
-	}
-
-	// 프로보노 정보 검색
-	public static ProbonoDTO getProbono(String probonoId) {
-		ProbonoDTO probono = null;
-		try {
-			probono = ProbonoDAO.getProbono(probonoId);
-			RunningSuccessView.selectSuccess();
+			dayWeatherInfo = service.getOneDayAirPollutionData(date, location);
+			SuccessView.selectSuccess("날짜인 "+ date + "과 " + location + "지역의 기상정보");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			RunningEndView.showError("프로보노 id로 해당 프로보노 검색 오류 ");
+			EndView.showError("대기오염정보를 해당 일, 지역으로 해당 대기오염정보 검색시 오류 ");
 		}
-		return probono;
+		return dayWeatherInfo;
+	}
+
+	// ----------------------- Select Grade CONTROLLER Section ----------------------
+	
+	public FineDustGradeDTO getFineDustGrade(String date, String location) {
+		FineDustGradeDTO result = null;
+		try {
+			result = service.getOneDayFineDustGrade(date, location);
+			SuccessView.selectSuccess("날짜인 "+ date + "과 " + location + "지역의 미세먼지 등급 출력");
+		} catch (SQLException s) {
+			s.printStackTrace();
+			EndView.showError("미세먼지 보려다 실패");
+		}catch (NotExistException s) {
+			s.printStackTrace();
+			EndView.showError("미세먼지 보려다 없네");
+		}
+		return result;
+	}
+
+	public ThiGradeDTO getThiGrade(String date, String stationName) {
+		ThiGradeDTO result = null;
+		try {
+			result = service.getOneDayThiGrade(date, stationName);
+			SuccessView.selectSuccess("날짜인 "+ date + "과 " + stationName + "지역의 불쾌지수 등급 출력");
+		} catch (SQLException s) {
+			s.printStackTrace();
+			EndView.showError("모든 재능 기부자 검색시 에러 발생");
+		}catch (NotExistException s) {
+			s.printStackTrace();
+			EndView.showError("미세먼지 보려다 없네");
+		}
+		return result;
 	}
 }

@@ -38,7 +38,6 @@ public class GetAirPollutionAPI {
 		}
 		return obj;
 	}
-
 	public static String urlConfig(int i) {
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
@@ -59,7 +58,5 @@ public class GetAirPollutionAPI {
 		for (int i = 0; i < 90; i++) {
 			DayAirPollutionDAO.addDayAirPollution(JsonToAirPollution.JSONToAirPollutionData(getAirPollutionData(urlConfig(i))));
 		}
-
 	}
-
 }

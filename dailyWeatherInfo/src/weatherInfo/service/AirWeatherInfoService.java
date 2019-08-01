@@ -24,18 +24,18 @@ public class AirWeatherInfoService {
 	
 	// ------------------------- DayWeather SERVICE Section --------------------------
 	
-	public static void notExistDayWeather(String date, String stationName) throws NotExistException, SQLException{
+	public void notExistDayWeather(String date, String stationName) throws NotExistException, SQLException{
 		DayWeatherDTO weather = DayWeatherDAO.getOneDayWeather(date, stationName);
 		if(weather == null){
 			throw new NotExistException("검색하신 날짜와 지점명에 매칭되는 기상정보가 없습니다.");
 		}
 	}
 	
-	public static ArrayList<DayWeatherDTO> getAllDayWeatherData() throws SQLException{
+	public ArrayList<DayWeatherDTO> getAllDayWeatherData() throws SQLException{
 		return DayWeatherDAO.getAllDayWeather();
 	}
 	
-	public static DayWeatherDTO getOneDayWeatherData(String date, String stationName) throws SQLException, NotExistException{
+	public DayWeatherDTO getOneDayWeatherData(String date, String stationName) throws SQLException, NotExistException{
 		DayWeatherDTO aDayWeather = DayWeatherDAO.getOneDayWeather(date, stationName);
 		if(aDayWeather == null){
 			throw new NotExistException("검색하신 기상정보가 없습니다.");
@@ -45,18 +45,18 @@ public class AirWeatherInfoService {
 	
 	// ---------------------- DayAirPollution SERVICE Section -------------------------
 	
-	public static void notExistDayAirPollution(String date, String location) throws NotExistException, SQLException{
+	public void notExistDayAirPollution(String date, String location) throws NotExistException, SQLException{
 		DayAirPollutionDTO airPollution = DayAirPollutionDAO.getOneDayAirPollution(date, location);
 		if(airPollution == null){
 			throw new NotExistException("검색하신 날짜와 지점명에 매칭되는 대기오염물질 정보가 없습니다.");
 		}
 	}
 	
-	public static ArrayList<DayAirPollutionDTO> getAllDayAirPollutionData() throws SQLException{
+	public ArrayList<DayAirPollutionDTO> getAllDayAirPollutionData() throws SQLException{
 		return DayAirPollutionDAO.getAllDayAirPollution();
 	}
 	
-	public static DayAirPollutionDTO getOneDayAirPollutionData(String date, String location) throws SQLException, NotExistException{
+	public DayAirPollutionDTO getOneDayAirPollutionData(String date, String location) throws SQLException, NotExistException{
 		DayAirPollutionDTO aDayAirPollution = DayAirPollutionDAO.getOneDayAirPollution(date, location);
 		if(aDayAirPollution == null){
 			throw new NotExistException("검색하신 대기오염물질 정보가 없습니다.");
@@ -66,7 +66,7 @@ public class AirWeatherInfoService {
 	
 	// --------------------- Weather & AirPollution Mixed getGRADE SERVICE ---------------------
 	
-	public static ThiGradeDTO getOneDayThiGrade(String date, String stationName) throws SQLException, NotExistException{
+	public ThiGradeDTO getOneDayThiGrade(String date, String stationName) throws SQLException, NotExistException{
 		ThiGradeDTO aDayThiGrade = ThiGradeDAO.getThiGrade(date, stationName);
 		if(aDayThiGrade == null){
 			throw new NotExistException("검색하신 불쾌지수 등급 정보가 없습니다.");
@@ -74,7 +74,7 @@ public class AirWeatherInfoService {
 		return aDayThiGrade;
 	}
 	
-	public static FineDustGradeDTO getOneDayFineDustGrade(String date, String location) throws SQLException, NotExistException{
+	public FineDustGradeDTO getOneDayFineDustGrade(String date, String location) throws SQLException, NotExistException{
 		FineDustGradeDTO aDayFineDustGrade = FineDustGradeDAO.getFineDustGrade(date, location);
 		if(aDayFineDustGrade == null){
 			throw new NotExistException("검색하신 미세먼지 등급 정보가 없습니다.");
