@@ -2,10 +2,14 @@ package weatherInfo.view;
 
 import java.util.ArrayList;
 
+import weatherInfo.model.dto.DayAirPollutionDTO;
 import weatherInfo.model.dto.DayWeatherDTO;
+import weatherInfo.model.dto.FineDustGradeDTO;
+import weatherInfo.model.dto.ThiGradeDTO;
 
 public class EndView {
-	// 모든 기상정보 출력
+	//----------------------- Show All About Weather Data ------------------- 
+	
 	public static void allWeatherListView(ArrayList<DayWeatherDTO> allDayWeatherInfo) {
 		System.out.println("모든 기상정보 데이터 출력");
 		int length = allDayWeatherInfo.size();
@@ -16,17 +20,38 @@ public class EndView {
 		}
 	}
 
-	// 특정 프로젝트 출력
 	public static void aDayWeatherView(DayWeatherDTO DayWeatherInfo) {
 		System.out.println(DayWeatherInfo);
 	}
+	
+	//----------------------- Show All About Air Pollution Data ------------------- 
+	
+	public static void allAirPollutionListView(ArrayList<DayAirPollutionDTO> allDayAirPollutionInfo) {
+		System.out.println("모든 기상정보 데이터 출력");
+		int length = allDayAirPollutionInfo.size();
+		if (length != 0) {
+			for (int index = 0; index < length; index++) {
+				System.out.println("검색정보 " + (index + 1) + " - " + allDayAirPollutionInfo.get(index));
+			}
+		}
+	}
 
-	// ?? 모든 DTO 정보 출력하는 메소드
-	//public static void allView(Object object) {
-		//System.out.println(object);
-	//}
+	public static void aDayAirPollutionView(DayAirPollutionDTO DayAirPollutionInfo) {
+		System.out.println(DayAirPollutionInfo);
+	}
+	
+	//--------------------------- Show All About Grade -----------------------
+	
+	public static void aFineDustGradeView(FineDustGradeDTO dustGradeInfo) {
+		System.out.println(dustGradeInfo);
+	}
+	
+	public static void aThiGradeView(ThiGradeDTO thiGradeInfo) {
+		System.out.println(thiGradeInfo);
+	}
+	
+	//--------------------------- Show Exception Error -----------------------
 
-	// 예외 상황 출력
 	public static void showError(String message) {
 		System.out.println(message);
 	}

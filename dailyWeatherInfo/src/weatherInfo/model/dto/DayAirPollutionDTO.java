@@ -33,21 +33,21 @@ public class DayAirPollutionDTO {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("1. 측정일시 : ");
-		builder.append(msrdt_de);
+		builder.append(msrdt_de + "\n");
 		builder.append("2. 측정소명 : ");
-		builder.append(msrste_nm);
+		builder.append(msrste_nm + "\n");
 		builder.append("3. 이산화질소농도(ppm) : ");
-		builder.append(no2);
+		builder.append(no2 + "\n");
 		builder.append("4. 오존농도(ppm) : ");
-		builder.append(o3);
+		builder.append(o3 + "\n");
 		builder.append("5. 일산화탄소농도(ppm) : ");
-		builder.append(co);
+		builder.append(co + "\n");
 		builder.append("6. 아황산가스(ppm) : ");
-		builder.append(so2);
+		builder.append(so2 + "\n");
 		builder.append("7. 미세먼지(㎍/㎥) : ");
-		builder.append(pm10);
+		builder.append(pm10 + "\n");
 		builder.append("8. 초미세먼지(㎍/㎥): ");
-		builder.append(pm25);
+		builder.append(pm25 + "\n");
 		return builder.toString();
 	}
 	

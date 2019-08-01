@@ -29,6 +29,7 @@ public class AirWeatherInfoController {
 		try {
 			allDayAirPollution = service.getAllDayAirPollutionData();
 			SuccessView.selectSuccess("모든 대기오염물질 정보 출력");
+			EndView.allAirPollutionListView(allDayAirPollution);
 		} catch (SQLException s) {
 			s.printStackTrace();
 			EndView.showError("모든 대기오염정보 검색시 에러 발생");
@@ -37,14 +38,18 @@ public class AirWeatherInfoController {
 	}
 
 	// 특정 날짜, 지역 대기오염 정보 출력
-	public DayAirPollutionDTO getDayAirPollution(String date, String location) throws NotExistException {
+	public DayAirPollutionDTO getDayAirPollution(String date, String location) {
 		DayAirPollutionDTO dayAirPollution = null;
 		try {
 			dayAirPollution = service.getOneDayAirPollutionData(date, location);
 			SuccessView.selectSuccess("날짜인 "+ date + "과 " + location + "지역의 대기오염물질정보");
+			EndView.aDayAirPollutionView(dayAirPollution);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			EndView.showError("대기오염정보를 해당 일, 지역으로 해당 대기오염정보 검색시 오류 ");
+		}catch (NotExistException e) {
+			e.printStackTrace();
+			EndView.showError("대기오염정보를 해당 일, 지역으로 해당 대기오염정보 없음 ");
 		}
 		return dayAirPollution;
 	}
@@ -56,6 +61,7 @@ public class AirWeatherInfoController {
 		try {
 			allDayWeatherInfo = service.getAllDayWeatherData();
 			SuccessView.selectSuccess("모든 기상정보 출력");
+			EndView.allWeatherListView(allDayWeatherInfo);
 		} catch (SQLException s) {
 			s.printStackTrace();
 			EndView.showError("모든 날씨정보 검색시 에러 발생");
@@ -63,14 +69,18 @@ public class AirWeatherInfoController {
 		return allDayWeatherInfo;
 	}
 
-	public DayAirPollutionDTO getDayWeatherInfo(String date, String location) throws NotExistException {
-		DayAirPollutionDTO dayWeatherInfo = null;
+	public DayWeatherDTO getDayWeatherInfo(String date, String location) {
+		DayWeatherDTO dayWeatherInfo = null;
 		try {
-			dayWeatherInfo = service.getOneDayAirPollutionData(date, location);
+			dayWeatherInfo = service.getOneDayWeatherData(date, location);
 			SuccessView.selectSuccess("날짜인 "+ date + "과 " + location + "지역의 기상정보");
+			EndView.aDayWeatherView(dayWeatherInfo);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			EndView.showError("대기오염정보를 해당 일, 지역으로 해당 대기오염정보 검색시 오류 ");
+		} catch (NotExistException e) {
+			e.printStackTrace();
+			EndView.showError("일자가 없거나 지역이 존재하지 않음");
 		}
 		return dayWeatherInfo;
 	}
@@ -82,6 +92,7 @@ public class AirWeatherInfoController {
 		try {
 			result = service.getOneDayFineDustGrade(date, location);
 			SuccessView.selectSuccess("날짜인 "+ date + "과 " + location + "지역의 미세먼지 등급 출력");
+			EndView.aFineDustGradeView(result);
 		} catch (SQLException s) {
 			s.printStackTrace();
 			EndView.showError("미세먼지 보려다 실패");
@@ -97,6 +108,7 @@ public class AirWeatherInfoController {
 		try {
 			result = service.getOneDayThiGrade(date, stationName);
 			SuccessView.selectSuccess("날짜인 "+ date + "과 " + stationName + "지역의 불쾌지수 등급 출력");
+			EndView.aThiGradeView(result);
 		} catch (SQLException s) {
 			s.printStackTrace();
 			EndView.showError("모든 재능 기부자 검색시 에러 발생");

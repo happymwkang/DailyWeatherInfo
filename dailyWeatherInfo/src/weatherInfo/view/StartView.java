@@ -1,25 +1,33 @@
 package weatherInfo.view;
 
+import weatherInfo.exception.NotExistException;
 import weatherInfo.service.AirWeatherInfoController;
-import weatherInfo.service.AirWeatherInfoService;
 
 public class StartView {
-	public static AirWeatherInfoController service = AirWeatherInfoController.getInstance();
+	public static AirWeatherInfoController controller = AirWeatherInfoController.getInstance();
 	
-	public static void main(String [] args){
+	public static void main(String [] args) {
 		
-		System.out.println("***** 모든 Project 검색 *****");
-	
-		service.getAllDayAirPollution();
+		// -------------------------- Start weather service ----------------------
+//		System.out.println("***** 모든 기상정보  조회 *****");
+//		controller.getAllDayWeatherInfo();
 					
-//		
-//		//모든 재능 기부자들 검색
-//		System.out.println("\n***** 모든 재능 기부자 검색 *****");
-//		RunningEndView.projectListView(ProbonoProjectController.getAllActivists());
-//		
-//		//특정 프로보노 정보 검색
-//		System.out.println("\n***** 특정 프로보노 정보 검색 *****");
-//		RunningEndView.allView(ProbonoProjectController.getProbono("schweitzer"));
+		System.out.println("***** 일자별 기상정보  조회 *****");
+		controller.getDayWeatherInfo("20190501", "서초");
+
+		// -------------------------- Start air pollution service ----------------------
+//		System.out.println("***** 모든 대기오염물질 정보 조회 *****");
+//		controller.getAllDayAirPollution();
+		
+		System.out.println("***** 일자별 대기오염물질 정보  조회 *****");
+		controller.getDayAirPollution("20190710", "서초구");
+		
+		// -------------------------- Start grade service ----------------------
+		System.out.println("***** 일자별 & 지역별 미세먼지 등급 조회 *****");
+		controller.getFineDustGrade("20190601", "영등포구");
+		
+		System.out.println("***** 일자별 & 지역별 불쾌지수 등급 조회 *****");
+		controller.getThiGrade("20190501", "마포");
 	}
 		
 }
