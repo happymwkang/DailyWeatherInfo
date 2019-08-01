@@ -1,8 +1,12 @@
 package weatherInfo.model.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class DayAirPollutionDTO {
 	/*
 순번	출력명		출력설명
@@ -24,37 +28,26 @@ public class DayAirPollutionDTO {
 	private double pm10;
 	private double pm25;
 	
-	public DayAirPollutionDTO(String msrdt_de, String msrste_nm, double no2, double o3, double co, double so2, double pm10, double pm25) {
-		super();
-		this.msrdt_de = msrdt_de;
-		this.msrste_nm = msrste_nm;
-		this.no2 = no2;
-		this.o3 = o3;
-		this.co = co;
-		this.so2 = so2;
-		this.pm10 = pm10;
-		this.pm25 = pm25;
-	}
 	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("1. 측정일시 : ");
-		builder.append(msrdt_de);
+		builder.append(msrdt_de + "\n");
 		builder.append("2. 측정소명 : ");
-		builder.append(msrste_nm);
+		builder.append(msrste_nm + "\n");
 		builder.append("3. 이산화질소농도(ppm) : ");
-		builder.append(no2);
+		builder.append(no2 + "\n");
 		builder.append("4. 오존농도(ppm) : ");
-		builder.append(o3);
+		builder.append(o3 + "\n");
 		builder.append("5. 일산화탄소농도(ppm) : ");
-		builder.append(co);
+		builder.append(co + "\n");
 		builder.append("6. 아황산가스(ppm) : ");
-		builder.append(so2);
+		builder.append(so2 + "\n");
 		builder.append("7. 미세먼지(㎍/㎥) : ");
-		builder.append(pm10);
+		builder.append(pm10 + "\n");
 		builder.append("8. 초미세먼지(㎍/㎥): ");
-		builder.append(pm25);
+		builder.append(pm25 + "\n");
 		return builder.toString();
 	}
 	

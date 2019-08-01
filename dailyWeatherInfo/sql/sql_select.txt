@@ -1,0 +1,22 @@
+--discomfort 추가 
+select a.*, b.discomfort from dayweatherinfo a,(
+select saws_obs_tm, stn_nm, 9/5*saws_ta_avg -0.55*(1-saws_hd_avg*0.01)*(9/5*saws_ta_avg-26)+32 discomfort 
+from dayweatherinfo) b
+where a.saws_obs_tm = b.saws_obs_tm 
+and a.stn_nm = b.stn_nm
+
+--불쾌지수+ 불쾌지수 등급 출력
+select a.*, b.discomfort, c.grade from dayweatherinfo a,(
+select saws_obs_tm, stn_nm, 9/5*saws_ta_avg -0.55*(1-saws_hd_avg*0.01)*(9/5*saws_ta_avg-26)+32 discomfort 
+from dayweatherinfo) b, discomfort_grade c
+where a.saws_obs_tm = b.saws_obs_tm and a.stn_nm = b.stn_nm and b.discomfort between c.low and c.high
+and a.saws_obs_tm = ? and a.stn_nm = ?
+
+
+--미세먼지 grade
+select a.*,grade 미세먼지grade from dayairPollution a, finedust_grade b
+where a.pm10 between pm10_low and pm10_high
+
+--초미세먼지 grade
+select a.*,grade 초미세먼지grade from dayairPollution a, finedust_grade b
+where a.pm25 between pm25_low and pm25_high

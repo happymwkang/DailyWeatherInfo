@@ -1,0 +1,2 @@
+/* 불쾌지수 계산로직 */
+select 9/5*saws_ta_avg -0.55*(1-saws_hd_avg*0.01)*(9/5*saws_ta_avg-26)+32 from dayweatherinfo

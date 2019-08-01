@@ -1,5 +1,5 @@
 
-/*ÀÏÀÏ ´ë±â¿À¿°Á¤º¸ Å×ÀÌºí*/
+/*ì¼ì¼ ëŒ€ê¸°ì˜¤ì—¼ì •ë³´ í…Œì´ë¸”*/
 CREATE TABLE dayairpollution(
   MSRDT_DE Varchar2(10) NOT NULL,
   MSRSTE_NM Varchar2(30) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE dayairpollution(
   PM10 Number,
   PM25 Number)
   
-  //ÀÏÀÏ ±â»óÁ¤º¸ Å×ÀÌºí
+  //ì¼ì¼ ê¸°ìƒì •ë³´ í…Œì´ë¸”
   create table dayWeatherInfo
     (
     saws_obs_tm varchar2(10),
@@ -25,7 +25,6 @@ CREATE TABLE dayairpollution(
    saws_ws_max number,
    saws_rn_sum number);
 
-
 create table finedust_grade
 ( grade varchar2(20),
   PM10_low number,
@@ -33,29 +32,29 @@ create table finedust_grade
   PM25_low number,
   PM25_high number);
   
-  insert into finedust_grade values('ÁÁÀ½', 0, 30, 0, 15);
+  insert into finedust_grade values('ì¢‹ìŒ', 0, 30, 0, 15);
   
-  insert into finedust_grade values('º¸Åë', 31, 50, 16, 25);
+  insert into finedust_grade values('ë³´í†µ', 31, 50, 16, 25);
   
-  insert into finedust_grade values('³ª»İ', 51, 100, 26, 50);
+  insert into finedust_grade values('ë‚˜ì¨', 51, 100, 26, 50);
   
-  insert into finedust_grade values('¸Å¿ì³ª»İ', 101, 1000, 51, 1000);
+  insert into finedust_grade values('ë§¤ìš°ë‚˜ì¨', 101, 1000, 51, 1000);
   
   create table discomfort_grade
   ( grade varchar2(20),
 	low number,
 	high number);
 	
-  insert into discomfort_grade values('¸Å¿ì³ôÀ½', 80, 100);
+  insert into discomfort_grade values('ë§¤ìš°ë†’ìŒ', 80, 100);
   
-  insert into discomfort_grade values('³ôÀ½', 75, 79);
+  insert into discomfort_grade values('ë†’ìŒ', 75, 79);
   
-  insert into discomfort_grade values('º¸Åë', 68, 74);
+  insert into discomfort_grade values('ë³´í†µ', 68, 74);
   
-  insert into discomfort_grade values('³·À½', 0, 67);
+  insert into discomfort_grade values('ë‚®ìŒ', 0, 67);
   
   create table Location
   ( loc varchar2(30),
     MSRSTE_NM Varchar2(30),
     stn_nm varchar2(30) );
-    
+
