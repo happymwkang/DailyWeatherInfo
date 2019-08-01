@@ -9,9 +9,10 @@ import java.util.Date;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
+import weatherInfo.model.dao.DayWeatherDAO;
 
 public class GetWeatherAPI {
-	public static JSON readUrl(String dateConfig) throws Exception {
+	public static JSON getWeatherData(String dateConfig) throws Exception {
 		BufferedInputStream reader = null;
 		String result = null;
 		try {
@@ -44,11 +45,15 @@ public class GetWeatherAPI {
 		}
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
-            cal.add(Calendar.DATE, i);		//날짜 더하기
-//            cal.add(Calendar.MONTH, 1);		//월 더하기
+            cal.add(Calendar.DATE, i);		
 
-//            String varDate = new SimpleDateFormat("yyyyMMdd").format(date);
-//	System.out.println("날짜 확인"+format.format(cal.getTime()));
 	return format.format(cal.getTime());
+	}
+	
+	public static void main(String[] args) throws Exception {
+		for (int i = 0; i < 90; i++) {
+			DayWeatherDAO.addDayWeatherData(JsonToWeather.JSONToWeatherData(getWeatherData(urlConfig(i))));
+		}
+
 	}
 }

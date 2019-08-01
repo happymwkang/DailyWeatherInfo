@@ -9,9 +9,9 @@ and a.stn_nm = b.stn_nm
 select a.*, b.discomfort, c.grade from dayweatherinfo a,(
 select saws_obs_tm, stn_nm, 9/5*saws_ta_avg -0.55*(1-saws_hd_avg*0.01)*(9/5*saws_ta_avg-26)+32 discomfort 
 from dayweatherinfo) b, discomfort_grade c
-where a.saws_obs_tm = b.saws_obs_tm 
-and a.stn_nm = b.stn_nm 
-and b.discomfort between c.low and c.high
+where a.saws_obs_tm = b.saws_obs_tm and a.stn_nm = b.stn_nm and b.discomfort between c.low and c.high
+and a.saws_obs_tm = ? and a.stn_nm = ?
+
 
 --미세먼지 grade
 select a.*,grade 미세먼지grade from dayairPollution a, finedust_grade b

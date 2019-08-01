@@ -8,10 +8,8 @@ import net.sf.json.JSONObject;
 import weatherInfo.model.dto.DayWeatherDTO;
 
 public class JsonToWeather {
-	public static ArrayList<DayWeatherDTO> JSONToWeather(JSON json) throws Exception {
-//		JSONParser jsonparser = new JSONParser();
+	public static ArrayList<DayWeatherDTO> JSONToWeatherData(JSON json) throws Exception {
 		ArrayList<DayWeatherDTO> weatherColumns= new ArrayList<DayWeatherDTO>();
-//		JSONObject jsonobject = (JSONObject) jsonparser.parse(GetWeatherAPI.readUrl(GetWeatherAPI.urlConfig(1)));
 		JSONObject obj = JSONObject.fromObject(json);
 		JSONObject obj1 = (JSONObject) obj.get("DailyWeatherStation");
 		JSONArray rowData = (JSONArray) obj1.get("row");
@@ -23,7 +21,6 @@ public class JsonToWeather {
 					(double)dataObj.get("SAWS_HD_AVG"), (double)dataObj.get("SAWS_HD_MIN"), (double)dataObj.get("SAWS_HD_MAX"),
 					(double)dataObj.get("SAWS_WS_AVG"), (double)dataObj.get("SAWS_WS_MAX"), (double)dataObj.get("SAWS_RN_SUM")));
 		}
-		//System.out.println(columns);
 		return weatherColumns;
 	}
 }

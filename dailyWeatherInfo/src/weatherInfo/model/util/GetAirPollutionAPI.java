@@ -15,7 +15,7 @@ import weatherInfo.model.dao.DayAirPollutionDAO;
 
 public class GetAirPollutionAPI {
 
-	public static JSON getData(String dateConfig) {
+	public static JSON getAirPollutionData(String dateConfig) {
 		BufferedReader br = null;
 		String result = "";
 		JSONObject obj = null;
@@ -51,23 +51,15 @@ public class GetAirPollutionAPI {
 		Calendar cal = Calendar.getInstance();
 			cal.setTime(date);
 			cal.add(Calendar.DATE, i); // 날짜 더하기
-//          cal.add(Calendar.MONTH, 1);		//월 더하기
 
-//          String varDate = new SimpleDateFormat("yyyyMMdd").format(date);
-//		    System.out.println("날짜 확인"+format.format(cal.getTime()));
-		return format.format(cal.getTime());
+			return format.format(cal.getTime());
 	}
 
 	public static void main(String[] args) throws Exception {
 		for (int i = 0; i < 90; i++) {
-			DayAirPollutionDAO.addDayAirPollution(JsonToAirPollution.jasonParse(getData(urlConfig(i))));
+			DayAirPollutionDAO.addDayAirPollution(JsonToAirPollution.JSONToAirPollutionData(getAirPollutionData(urlConfig(i))));
 		}
-//	System.out.println(JSONPaser.jasonParse(null));
-//	System.out.println(urlConfig(50));
 
-//	for (int i = 0 ; i < 90 ; i ++) {
-//		 DayWeatherDAO.addDayWeatherData(JsonToWeather.JSONToWeather(GetWeatherAPI.readUrl(urlConfig(i))));
-//		}
 	}
 
 }
