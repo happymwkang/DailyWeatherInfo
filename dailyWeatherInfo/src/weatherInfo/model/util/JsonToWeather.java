@@ -8,11 +8,15 @@ import net.sf.json.JSONObject;
 import weatherInfo.model.dto.DayWeatherDTO;
 
 public class JsonToWeather {
-	public static ArrayList<DayWeatherDTO> JSONToWeatherData(JSON json) throws Exception {
+	public static ArrayList<DayWeatherDTO> JSONToWeather(JSON json) throws Exception {
+//		JSONParser jsonparser = new JSONParser();
 		ArrayList<DayWeatherDTO> weatherColumns= new ArrayList<DayWeatherDTO>();
+//		JSONObject jsonobject = (JSONObject) jsonparser.parse(GetWeatherAPI.readUrl(GetWeatherAPI.urlConfig(1)));
 		JSONObject obj = JSONObject.fromObject(json);
-		JSONObject obj1 = (JSONObject) obj.get("DailyWeatherStation");
-		JSONArray rowData = (JSONArray) obj1.get("row");
+		JSONObject obj2 = (JSONObject) obj.get("DailyWeatherStation");
+		JSONArray rowData = (JSONArray) obj2.get("row");
+		JSONObject dataObj = null; 
+
 		
 		for (int i = 0; i < rowData.size(); i++) {
 			JSONObject dataObj = (JSONObject)rowData.get(i);

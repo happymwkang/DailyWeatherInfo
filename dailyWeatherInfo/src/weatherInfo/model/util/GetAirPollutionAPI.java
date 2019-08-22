@@ -11,7 +11,7 @@ import java.util.Date;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
-import weatherInfo.model.dao.DayAirPollutionDAO;
+import weatherInfo.model.dao.DayWeatherDAO;
 
 public class GetAirPollutionAPI {
 
@@ -40,6 +40,23 @@ public class GetAirPollutionAPI {
 	}
 	public static String urlConfig(int i) {
 
+	SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+	Date date = null;
+	try {
+		date = format.parse("20190628");
+	} catch (ParseException e) {
+		e.printStackTrace();
+	}
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.add(Calendar.DATE, i);		//날짜 더하기
+//            cal.add(Calendar.MONTH, 1);		//월 더하기
+
+//            String varDate = new SimpleDateFormat("yyyyMMdd").format(date);
+//	System.out.println("날짜 확인"+format.format(cal.getTime()));
+	return format.format(cal.getTime());
+	}
+
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		Date date = null;
 		try {
@@ -50,9 +67,19 @@ public class GetAirPollutionAPI {
 		Calendar cal = Calendar.getInstance();
 			cal.setTime(date);
 			cal.add(Calendar.DATE, i); // 날짜 더하기
-
-			return format.format(cal.getTime());
-	}
+	
+public static void main(String[] args) throws Exception {
+//	for (int i = 0 ; i < 90 ; i ++) {
+//	 DayAirPollutionDAO.addDayAirPollution(JsonToAirPollution.jasonParse(getData(urlConfig(i))));
+//	}
+//	System.out.println(JSONPaser.jasonParse(null));
+//	System.out.println(urlConfig(50));
+	
+	for (int i = 0 ; i < 90 ; i ++) {
+		 DayWeatherDAO.addDayWeatherData(JsonToWeather.JSONToWeather(GetWeatherAPI.readUrl(urlConfig(i))));
+		}
+// System.out.println(GetWeatherAPI.readUrl(urlConfig(1)));	
+}
 
 	public static void main(String[] args) throws Exception {
 		for (int i = 0; i < 90; i++) {

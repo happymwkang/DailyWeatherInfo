@@ -9,15 +9,17 @@ import java.util.Date;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
+<<<<<<< HEAD
 import weatherInfo.model.dao.DayWeatherDAO;
 
 public class GetWeatherAPI {
-	public static JSON getWeatherData(String dateConfig) throws Exception {
+	public static JSON readUrl(String dateConfig) throws Exception {
+
 		BufferedInputStream reader = null;
 		String result = null;
 		try {
 			URL url = new URL(
-					"http://openAPI.seoul.go.kr:8088/4278436266736363373278657a4958/json/DailyWeatherStation/1/999/" + dateConfig);
+					"http://openAPI.seoul.go.kr:8088/79596d537668617032376245675851/json/DailyWeatherStation/1/999/" + dateConfig);
 			reader = new BufferedInputStream(url.openStream());
 			StringBuffer buffer = new StringBuffer();
 			int i;
@@ -25,9 +27,10 @@ public class GetWeatherAPI {
 			while ((i = reader.read(b)) != -1) {
 				buffer.append(new String(b, 0, i, "UTF-8"));
 			}
-				result = buffer.toString();
-				JSONObject json = JSONObject.fromObject(result);
-			return json; 
+
+			 result =  buffer.toString();
+			  JSONObject obj = JSONObject.fromObject(result);
+			  return obj;
 		} finally {
 			if (reader != null)
 				reader.close();
